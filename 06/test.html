@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id = "t"><input type = "hidden" id = "sss" value = "aaa"></div>
+
+</body>
+<script>
+    var d = document.getElementById("sss").getAttributeNode("value")
+    document.getElementById("sss").removeAttributeNode(d);
+    alert(document.getElementById("t").innerHTML);
+</script>
+</html>

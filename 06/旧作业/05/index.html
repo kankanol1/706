@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #backImg {
+            height: 700px;
+            width: 900px;
+            margin: 0 auto;
+            padding: 0 auto;
+            background-image: url("img/01.jpg");
+            background-repeat:no-repeat;
+            position: relative;
+
+        }
+        #divMessage {
+            top: 0;
+            left: 170px;
+            padding: 17px;
+            min-height: 126px;
+            width: 330px;
+            border:2px solid #574d97;
+            border-radius: 9px;
+            background-color: #eeecf8;
+            position: relative;
+            font-size: 15px;
+        }
+        #pMessage {
+            margin:16px 17px;
+
+        }
+        #divSent {
+            margin: 11px;
+            left:425px;
+            width: 96px;
+            height: 29px;
+            border: 2px solid white;
+            background-color: #14afd0;
+            border-radius: 14px;
+            text-align: center;
+            position: relative;
+        }
+        #pSent {
+            margin:5px auto;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        #divPeople{
+            height: 50px;
+            width: 364px;
+            left: 170px;
+            position: relative;
+        }
+
+
+        #divId {
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+            background-color: #14afd0;
+            position: relative;
+            float: left;
+        }
+        #divWord::before{
+            height: 50px;
+            width: 50px;
+            background-color: #ff4632;
+        }
+        #pWord{
+            margin:10px 20px;
+            border:0;
+            color: white;
+            font-size: 15px;
+            background-color: #554a92;
+        }
+        #divWord {
+            padding: auto 10px;
+            border: 0;
+            margin: 0 0 0 6px;
+            height: 40px;
+            width: 310px;
+            border-radius: 10px;
+            background-color: #554a92;
+            position: relative;
+            float: left;
+            color: white;
+        }
+        #divNum{
+            margin: 17px;
+        }
+        #cd {
+            top: 118px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var num = 1;
+            var oDivWord = document.getElementById("divWord");
+            oDivWord.onclick = function() {
+                oDivWord.setAttribute("value","");
+            };
+
+            var oDivMessage = document.getElementById("divMessage");
+            var oDivSent = document.getElementById("divSent");
+            oDivSent.onclick = function () {
+                if (!oDivWord.value) {
+                    alert("请输入内容！！！");
+                } else {
+                    if(oDivMessage.children[0].id === "pLiu"){
+                        var p = document.getElementById("pLiu");
+                       oDivMessage.removeChild(p);
+                    }
+                    var oDiv = document.createElement("div");
+                    oDiv.className = "pinkDiv";
+                    oDiv.style.height = "20px";
+                    oDiv.style.background = "pink";
+                    oDiv.style.border = "2px solid white";
+                    var oP1 = document.createElement("div");
+                    var oP2 = document.createElement("div");
+                    oP1.innerHTML = num;
+                    oP2.innerHTML = "楼：" +oDivWord.value;
+                    oP1.style.float = "left";
+                    oP2.style.float = "left";
+                    var oA = document.createElement("div");
+                    oA.innerHTML = "<a href='javascript:;'>删除</a>";
+                    oA.style.color = "white";
+                    oA.style.display = "none";
+                    oA.className = "oEnd";
+                    oA.style.float = "right";
+                    oDiv.appendChild(oP1);
+                    oDiv.appendChild(oP2);
+                    oDiv.appendChild(oA);
+                    oDivMessage.appendChild(oDiv);
+                    num ++;
+                }
+            };
+            oDivMessage.onmouseover = function(){
+                var oAa = document.getElementsByClassName("pinkDiv");
+                var oA = document.getElementsByClassName("oEnd");
+                //console.log(oAa,oA);
+                for (var i=0;i<oAa.length;i++){
+                    oAa[i].index = i;
+                    oA[i].index = i;
+                    oAa[i].onmouseover = function() {
+                        this.style.background = "gray";
+                        this.lastChild.style.display = "block";
+                        this.lastChild.onclick = function() {
+                            var oHuo = this.parentElement.firstChild;
+                            this.parentElement.parentElement.removeChild(this.parentElement);
+                            num --;
+                            var oHuo1 = this.parentElement;
+                            if(num == 1){
+                                var oPLiu = document.createElement("p");
+                                oPLiu.id = "pLiu";
+                                oPLiu.innerText = "留言板";
+                                oDivMessage.appendChild(oPLiu);
+                            }
+                            //var oLeave = document.getElementById("divMessage");
+                            var oLeaveC = oDivMessage.children;
+                            for(var i=0;i<num-1;i++){
+                                var oP3 = document.createElement("div");
+                                oP3.innerHTML = i+1;
+                                oP3.style.float = "left";
+                                var cc = oLeaveC[i].children[0];
+                                console.log(cc);
+                                oDivMessage.children[i].replaceChild(oP3,cc);
+                            }
+                        };
+
+                    };
+                }
+                for (var i=0;i<oAa.length;i++){
+                    oAa[i].index = i;
+                    oAa[i].onmouseout = function() {
+                        this.style.background = "pink";
+                        //console.log(this);
+                        this.lastElementChild.style.display = "none";
+                    };
+                }
+
+            };
+        }
+    </script>
+</head>
+
+<body>
+<div id="backImg">
+    <div id="cd">
+        <div id="divMessage" value="留言板"><p id="pLiu">留言板</p></div>
+
+        <input type="button" id="divSent" value="发送">
+
+        <div id="divPeople">
+
+            <div id="divId"></div>
+            <input type="text" id="divWord" value="你好" style="padding: auto 5px;">
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--
+
+留言板需求：
+    1、当未输入内容时点击发送，，弹出提示信息
+    2、如果输入了内容，点击发送，就把内容
+    3、鼠标移入效果
+    4、每条内容都有一个序号，如果删除内容，序号从新排列
+    5、当内容被全部
+
+
+留言板需求：
+    1, 当未输入内容时点击发送,弹出提示信息;
+    2, 如果输入了内容，点击发送，就把内容放入文本存储区域，同时把input框中的内容清空;
+    3, 有鼠标移入的效果;
+    4, 每条内容都有1个序号，如果删除内容，序号重新排列;
+    5, 当内容被全部删除之后，文本区域显示提示信息;
+
+
+
+
+
+
+
+
+-->
+
+<script>
+    var oAa = document.getElementsByClassName("oEnd");
+    console.log(oAa.length);
+    for (var i=0;i<oAa.length;i++){
+        console.log(oAa.length);
+    }
+</script>
+</body>
+</html>

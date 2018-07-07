@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .input1{
+            margin-left: 20px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.querySelector("#list");
+            var oLi = oUl.querySelectorAll("li");
+            var len = oLi.length;
+            var oBtn1 = oUl.querySelectorAll(".input1");
+            var oBtn2 = oUl.querySelectorAll(".input2");
+            for(var i=0;i<len;i++){
+                    oBtn1[i].onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        //对于第一个元素的上一个兄弟元素 null会自动获取到最后一个元素?????????
+                        //居然不需要判断  好奇怪哟
+                        //console.log(this.parentNode.previousElementSibling);//
+                        //null自动定位到父级的最后的一个元素
+                        //null 和 this.parentNode.previousElementSibling 的区别
+                        this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.previousElementSibling);
+                    };
+                    oBtn2[i].onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        //因为最后一个元素没有下一个兄弟元素 需要进行判断进行解决
+                        if(oUl.lastElementChild.firstElementChild.innerHTML==this.parentNode.firstChild.innerHTML){
+                            this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.parentNode.firstElementChild);
+                        }else{
+                            this.parentNode.parentNode.insertBefore(this.parentNode.nextElementSibling,this.parentNode);
+                        }
+                    };
+            }
+        }
+    </script>
+</head>
+<body>
+<ul id="list">
+    <li><span>1</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>2</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>3</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>4</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>5</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>6</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+body{
+    font-size: 14px;
+}
+#wrap{
+    background: url("../img/bg.jpg");
+    background-repeat: repeat-y;
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    /*
+    overflow: hidden;
+    */
+}
+
+#choose {
+    margin-top: 144px;
+    background: url("../img/top.png");
+    height: 50px;
+    position: relative;
+}
+
+#choose span{
+    position: relative;
+    float: left;
+    color: #000;
+    margin-left: 21px;
+    line-height: 26px;
+    padding: 12px 0;
+
+}
+#choose mark{
+
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    float: left;
+    color: #28a5c4;
+    border: 1px solid #28a5c4;
+    margin: 13px 10px 0 0;
+    text-indent: 6px;
+
+
+}
+#choose mark a{
+    margin-left: 10px;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    position: relative;
+    top: 3px;
+    right: 2px;
+    float: right;
+    /*
+    right:2px ;
+    */
+    background: #28a5c4;
+}
+.container{
+    margin: 0 auto;
+    width: 760px;
+}
+
+
+/****************bottom*******************/
+
+#list{
+    box-sizing: border-box;
+    background: url("../img/bottom.png");
+    height: 210px;
+    padding: 20px 0 31px 28px;
+}
+
+#list li{
+    line-height: 43px;
+    height: 43px;
+}
+#list li a{
+    padding-left: 24px;
+}
+#middle {
+    box-sizing: border-box;
+    margin-top: 30px;
+    background: url("../img/top.png");
+    width: 760px;
+    height: 30px;
+    line-height: 30px;
+    padding-left:20px;
+
+
+}
+#middle span{
+    padding: 0 20px;
+}
+#middle .color{
+    color: #2746c4;
+}
+#bottom {
+    background: url("../img/bottom.png");
+    width: 760px;
+    height: 3000px;
+
+}

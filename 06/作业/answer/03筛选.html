@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>筛选案例</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        ul{
+            list-style: none;
+        }
+        body{
+            background-color: black;
+            font-size: 14px;
+        }
+        .clearfix:after{
+            content: '.';
+            height: 0;
+            visibility: hidden;
+            display: block;
+            clear: both;
+        }
+        .clearfix:after{
+            *zoom: 1;
+        }
+        a{
+            text-decoration: none;
+        }
+        
+/************************************************************/
+        #out{
+            width: 660px;
+            margin: 50px auto;
+            background-color: white;
+            height: 250px;
+        }
+        #list{
+            padding: 10px 10px 0 10px;
+        }
+        #list li {
+            height: 50px;
+            line-height: 50px;
+            margin-left: 20px;
+            position: relative;
+        }
+        #list li span{
+            height: 50px;
+            line-height: 50px;
+            margin-left: auto ;
+            margin-right: 90px;
+            float: left;
+        }
+        #list li a{
+            text-decoration: none;
+            height: 50px;
+            line-height: 50px;
+            margin-left: 20px;
+            color: #4a83bb;
+            float: left;
+            /*
+            font-style: italic;
+            */
+        }
+        #list hr{
+            background-color: #e1e1e1;
+            height: 1px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        #out #choose{
+            width: 660px;
+            padding-left: 30px;
+            margin-top: 5px;
+        }
+        #choose mark{
+            background-color: white;
+            border: 1px solid black;
+            padding: 12px 10px;
+            position: relative;
+            margin-right: 10px;
+
+
+        }
+        #choose mark span{
+            line-height: 42px;
+
+        }
+        #choose mark strong{
+            line-height: 42px;
+            font-style: italic;
+            color: #f50c3a;
+
+
+        }
+        #choose mark a{
+            line-height: 42px;
+            color: #ce2e5b;
+            margin-left: 13px;
+
+            
+        }
+    </style>
+    <script>
+
+        window.onload = function(){
+            var oUl = document.getElementById("list");
+            var oLi = oUl.querySelectorAll("li");
+            var oChoose = document.querySelector("#choose");
+            //console.log(oChoose);
+            var len = oLi.length;
+            var aItem = null;
+            //console.log(oLi);
+            var chooseObj = {};
+            for(var i=0;i<len;i++){
+                aItem = oLi[i].querySelectorAll("a");
+                for(var j=0;j<aItem.length;j++){
+                    oLi[i].index = i;
+                    oLi[i].flag = null;
+                    aItem[j].onclick =function(){
+                        if(this.parentNode.flag){
+                            this.parentNode.flag.style.display = "block";
+                        }
+                        this.style.display = "none";
+                        chooseObj[this.parentElement.index] = [this.parentElement.firstElementChild.innerHTML,this.innerHTML];
+                        console.log(chooseObj);
+                        createElementMark(this);
+                        this.parentNode.flag = this;
+                    }
+                }
+            }
+            function createElementMark(self){
+                self.parentElement.flag = self;
+                var str = "";
+
+                for(var i=0;i<len;i++){
+                    if(chooseObj[i]){
+                        str += "<mark>"+"<span>"+chooseObj[i][0]+"</span>\n" +
+                            "<strong>"+ chooseObj[i][1]+"</strong>\n" +
+                            "<a  data-num="+i+" href=\"javascript:;\">X</a>"+"</mark>";
+                    }
+                }
+                //var oChoose = document.querySelector("#choose");
+                //var oMark = document.createElement("mark");
+                //oMark.setAttribute("data-index",self.parentElement.index);
+                //oMark.innerHTML = "<mark>"+"<span>"+self.parentNode.firstElementChild.innerHTML+"</span>\n" +
+                 //   "<strong>"+ self.innerHTML+"</strong>\n" +
+                  //  "<a href=\"javascript:;\">X</a>"+"</mark>";
+                oChoose.innerHTML = str;
+
+                var oA = oChoose.querySelectorAll("a");
+                for(var i=0;i<oA.length;i++){
+                    oA[i].index = i;
+                    oA[i].onclick = function(){
+                        this.parentNode.remove();
+                        delete chooseObj[this.index];
+                        //this.parentNode.flag = this;
+                        oLi[this.dataset.num].flag.style.display = "block";
+                    }
+                }
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+<div id="out">
+    <ul id="list">
+        <li>
+            <span>价格：</span>
+            <a href="javascript:;">0-199</a>
+            <a href="javascript:;">400-599</a>
+            <a href="javascript:;">600-799</a>
+            <a href="javascript:;">800以上</a>
+        </li>
+        <hr>
+        <li>
+            <span>类别：</span>
+            <a href="javascript:;">单肩包</a>
+            <a href="javascript:;">双肩包</a>
+            <a href="javascript:;">斜挎包</a>
+            <a href="javascript:;">手提包</a>
+        </li>
+        <hr>
+        <li>
+            <span>品牌：</span>
+            <a href="javascript:;">ONLY</a>
+            <a href="javascript:;">艾格</a>
+            <a href="javascript:;">稻草人</a>
+            <a href="javascript:;">宝姿</a>
+            <a href="javascript:;">ELLE</a>
+        </li>
+        <hr>
+    </ul>
+
+    <div id="choose">
+        <!--
+        <mark>
+            <span>价格：</span>
+            <strong>200-399</strong>
+            <a href="javascript:;">X</a>
+        </mark>
+        -->
+    </div>
+</div>
+
+<!--
+<script>
+
+
+var oList = document.querySelector("#list");
+            var oLi= null;
+            var oSpan = null;
+            var len = crumbData.length;
+            var oA = null;
+            var oMarkA = document.getElementById("choose");
+
+            //加载数据
+            for(var i=0;i<len;i++){
+                oLi = document.createElement("li");
+                oSpan = document.createElement("span");
+                oSpan.innerHTML = crumbData[i]['title'];
+                oLi.appendChild(oSpan);
+                for(var j=0;j<crumbData[i]["data"].length;j++){
+                    oA = document.createElement("a");
+                    oA.setAttribute("href","javascript:;");
+                    oA.innerHTML = crumbData[i]["data"][j];
+                    oLi.appendChild(oA);
+                }
+                oList.appendChild(oLi);
+            }
+
+            //点击li当中的a，给a添加一个颜色
+            var aLi = oList.children; //找到所有的li
+            var itemA = null;
+            //var oldA = null;//记录上次点击的a元素
+            var chooseObj = {};
+
+            for (var i=0;i<aLi.length;i++){
+                itemA = aLi[i].querySelectorAll("a");
+                aLi[i].flag = null;//给点击的父级做个标记
+                aLi[i].index = i;//给点击的父级添加下标
+                for(var j=0;j<itemA.length;j++){
+                    itemA[j].onclick = function(){
+                        //定点清除 全部清除
+                        //if(oldA) oldA.style.color = "";//给上一次点击清除颜色
+                        //this.style.color = "#2746c4";//给点击元素a设置颜色
+                        //oldA = this;//把当前点击的a元素赋值给 oldA
+
+                        //定点清除  每个a元素清除
+                        var parent = this.parentNode;
+                        //把当前a元素
+                        chooseObj[this.parentNode.index] = this.innerHTML;//二次点击重写
+                        console.log(chooseObj);
+                        createChooseHtml();
+                        if(parent.flag) this.parentElement.flag.style.color = "";
+                        this.style.color = "#2746c4";
+                        parent.flag=this;
+
+                    };
+                }
+            }
+
+
+            var createElement = document.querySelector("#choose div");
+            function createChooseHtml(){
+                //对象数据没有顺序
+                //对象没有length
+                var str = "";
+                var oMark = null;
+                for(var i=0;i<aLi.length;i++){
+
+                    if(chooseObj[i]){
+                        str +="<mark> "+ chooseObj[i] + "<a data-index=" + i +" href='javascript:;'>X</a></mark>";
+                    }
+                }
+                createElement.innerHTML = str;
+                //找到div中所有的a元素
+                var aA = createElement.querySelectorAll("a");
+                for(var k=0;k<aA.length;k++){
+                    aA[k].index =k;
+                    aA[k].onclick = function(){
+
+                        //从div中删除mark元素
+                        //this.parentNode.parentNode.removeChild(this.parentNode);
+                        this.parentNode.remove();
+
+                        //删除chooseObj中的数据
+                        //delete用于删除对象中的某个属性 如果没有则该方法最终会被释放
+                        //dataset对象可以找见标签里面 data- 开头的属性
+                        delete chooseObj[this.dataset.index];
+                        //删除颜色
+                        aLi[this.dataset.index].flag.style.color = "";
+
+                    };
+                }
+            }
+
+</script>
+-->
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            margin-top: 50px;
+            list-style: none;
+        }
+        input{
+            height: 35px;
+            width: 50px;
+            font-size: 16px;
+        }
+        li{
+            text-align: center;
+            line-height: 50px;
+            background: #14afd0;
+            height:50px;
+            width: 50px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oBtn = document.querySelector("#btn");
+            var oUl = document.querySelector("#list");
+            var oLi = null;
+            var oColor = ["hotpink","pink","skyblue","blue","brown","green"];
+            for(var i=0;i<6;i++){
+               oUl.children[i].style.background = oColor[i];
+            }
+            oBtn.onclick = function(){
+                if(oBtn.value ==="升序"){
+                    oBtn.value = "降序";
+                    for(var i=0;i<6;i++){
+                        for(var j=i+1;j<6;j++){
+                            oLi = document.querySelectorAll("li");
+                            if(oLi[i].innerHTML<oLi[j].innerHTML){
+                                var p1 = oLi[i].cloneNode(true);
+                                var p2 = oLi[j].cloneNode(true);
+                                oUl.replaceChild(p1,oLi[j]);
+                                oUl.replaceChild(p2,oLi[i]);
+                            }
+                        }
+                    }
+                }else {
+                    oBtn.value = "升序";
+                    for(var i=0;i<6;i++){
+                        for(var j=i+1;j<6;j++){
+                            oLi = document.querySelectorAll("li");
+                            if(oLi[i].innerHTML>oLi[j].innerHTML){
+                                var p1 = oLi[i].cloneNode(true);
+                                var p2 = oLi[j].cloneNode(true);
+                                oUl.replaceChild(p1,oLi[j]);
+                                oUl.replaceChild(p2,oLi[i]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<ul id="list">
+    <li>3</li>
+    <li>6</li>
+    <li>1</li>
+    <li>2</li>
+    <li>5</li>
+    <li>4</li>
+    <input id="btn" type="button" value="升序">
+</ul>
+
+<script>
+
+
+    var A =[3,4,5,7345,2451,3574,75,3,54];
+
+    var len =A.length
+    for(var i=0;i<len;i++){
+        //var c = A[i];
+        for(var j=i+1;j<len;j++){
+            if(A[i]>A[j]){
+                var c1 = A[j];
+                var c2 = A[i];
+                A[i] = c1;
+                A[j] = c2;
+               // console.log(A);
+            }
+        }
+
+    }
+    //console.log(A);
+
+</script>
+</body>
+</html>

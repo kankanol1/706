@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/cssReset.css">
+    <link rel="stylesheet" href="css/default.css">
+    <script type="text/javascript" src="json.js"></script>
+
+    <script>
+        window.onload = function(){
+            var S = document.getElementsByClassName("mar");
+            //console.log(S);
+            for(var i=0;i<4;i++){
+                S[i].style.display = "none";
+            }
+            var oUl = document.querySelector("#list");
+            var allLi = oUl.children;
+            var oLi= null;
+            var oSpan = null;
+            var len = crumbData.length;
+            var oA = null;
+            var oMarkA = document.getElementById("choose");
+
+            for(var i=0;i<len;i++){
+                oLi = document.createElement("li");
+                oSpan = document.createElement("span");
+                oSpan.innerHTML = crumbData[i]['title'];
+                oLi.appendChild(oSpan);
+                for(var j=0;j<crumbData[i]["data"].length;j++){
+                    oA = document.createElement("a");
+                    oA.setAttribute("href","javascript:;");
+                    oA.innerHTML = crumbData[i]["data"][j];
+                    oLi.appendChild(oA);
+                }
+                oUl.appendChild(oLi);
+            }
+
+
+
+
+            oMarkA.onmouseover = function(){
+                var oMark = document.querySelectorAll("mark");
+                if(oMark.length){
+                    for(var i=0;i<oMark.length;i++){
+                        oMark[i].lastChild.onclick = function(){
+                            //oMark[i].lastChild.index = i;
+                            this.parentElement.style.display = "none";
+                            //console.log(this.parentElement);
+                            /*
+                            for(var t=0;t<4;t++){
+                                console.log(oMark[t].style.display);
+                                if(oMark[t].style.display == "none"){
+                                    for(var s=0;s<allLi[t];s++){
+                                        console.log(t,s);
+                                        allLi[t][s].style.display = "none";
+                                    }
+                                }
+                            }*/
+                            var str = this.parentElement.firstChild.toString();
+                            console.log(str);
+                            for(var k1=0; k1<4;k1++){
+                                //console.log(k1);
+                                for(var k2=0;k2<crumbData[k1].data.length;k2++){
+                                    //console.log(k2);
+                                    //console.log(str,crumbData[k1].data[k2]);
+                                    if(str == crumbData[k1].data[k2]){
+                                        console.log(k1);
+                                    }
+
+                                }
+                                /*
+                                for()
+                                if( str in crumbData[k].data){
+                                    //t = k;
+                                    console.log(k);
+                                }
+                                */
+                            }
+
+
+
+
+                            //for(this.parentElement.firstChild in )
+                            //for(this.parentElement.firstChild in crumbData[])
+                            // for(var j=0;j<allLi[this.parentElement.index].length;j++){
+                            //    allLi[this.parentElement.index][j].style.color = "black";
+                            // }
+                        };
+
+                    }
+                }
+
+            };
+
+
+
+            for (var k=0;k<allLi.length;k++){
+                changeColor(k);
+            }
+
+            //自定义函数
+            function changeColor(num){
+
+                var oMark = null;
+                var oMa = null;
+                var oChoose = document.getElementById("choose");
+                var allA = allLi[num].getElementsByTagName("a");
+                for(var i=0;i<allA.length;i++){
+                    allA[i].onclick = function() {
+                        for(var j=0;j<allA.length;j++){
+                            allA[j].style.color = "black";
+                        }
+                        this.style.color = "#28a5c4";
+                        oMark = document.createElement("mark");
+                        oMark.class = i;
+                        oMark.appendChild(document.createTextNode(this.innerText));
+                        oMa =document.createElement('a');
+                        oMa.href = "javascript:;";
+                        oMa.innerHTML = "X";
+                        oMark.appendChild(oMa);
+                        oChoose.appendChild(oMark);
+
+                        var oMarkAll= document.querySelectorAll("mark");
+                        var oMarkI;
+                        oMarkI = oMarkAll[num];
+                        oMarkI.parentElement.replaceChild(oMark,oMarkI);
+
+                    }
+                }
+            }
+
+
+
+
+
+
+            /*
+            for(var j=0;j<allA.length;j++) {
+                console.log(allA.length);
+                allA[j].onclick = function () {
+                    //allA[i].index = i;
+                    //this.parentElement.style.color = "black";
+                    for (var k = 0; k < this.parentElement.length; k++) {
+                        console.log(this.parentElement.length);
+                        allA[k].style.color = "black";
+                        //allA[k].className = "color1";
+                        //console.log(allA[k]);
+                    }
+                   this.className = "color";
+                    //console.log(this);
+
+                }
+            }
+            */
+            //};
+            //}
+
+
+
+
+
+            /*
+            var oMark = null;
+            oMark = document.createElement("mark");
+            //oMark.href = "javascript:;";
+            oMark.appendChild(document.createTextNode(chooseObj[i])); //= chooseObj[i];
+            console.log(chooseObj[i]);
+            var oA = document.createElement("a");
+            oA.innerHTML = "X";
+            oMark.appendChild(oA);
+            createElement.appendChild(oMark);
+            */
+
+            /*
+            var oMark = null;
+            var oMa = null;
+            var oChoose = document.getElementById("choose");
+            for (var i=0;i<allLi.length;i++){
+                //console.log(allLi[i].innerHTML);
+                allLi[i].onclick = function(){
+                    this.className = "color";
+                    //console.log(this.innerText);
+                    oMark = document.createElement("mark");
+                    oMark.appendChild(document.createTextNode(this.innerText));
+                    oMa =document.createElement('a');
+                    oMa.href = "javascript:;";
+                    oMa.innerHTML = "X";
+                    oMark.appendChild(oMa);
+                    oChoose.appendChild(oMark);
+                    //console.log(oMark);
+                    var oCha = oChoose.getElementsByTagName("a");
+                    console.log(oCha);
+
+                };
+            }
+            */
+
+
+            /*
+            if(!oCha.length){
+                console.log("fff");
+                return;
+            }
+            console.log("oCha");
+            for(var i=0;i<oCha;i++){
+                oCha[i].onclick = function(){
+                    console.log("hello");
+                }
+            }
+            */
+
+
+
+        }
+    </script>
+
+</head>
+<body>
+
+<div id="wrap">
+
+    <div id="choose" class="container">
+        <span>你的选择：</span>
+
+        <!-- 标记Mark-->
+        <!--
+        <mark>三星<a href="javascript:;">X</a></mark>
+        -->
+
+        <mark class="mar">3.0-3.9英寸<a href="javascript:;">X</a></mark>
+        <mark class="mar">苹果(IOS)<a href="javascript:;">X</a></mark>
+        <mark class="mar">3.0-3.9英寸<a href="javascript:;">X</a></mark>
+        <mark class="mar">苹果(IOS)<a href="javascript:;">X</a></mark>
+
+    </div>
+
+    <ul id="list" class="container">
+        <!--
+        <li>
+            <span>品牌：</span>
+            <a href="#">苹果</a>
+            <a href="#">小米</a>
+            <a href="#">荣耀</a>
+            <a href="#">魅族</a>
+            <a href="#">华为</a>
+            <a href="#" class="color">三星</a>
+            <a href="#">OPPO</a>
+            <a href="#">vivo</a>
+        </li>
+        -->
+    </ul>
+
+    <div id="nav-list" class="container">
+        <span class="active">综合排名</span>
+        <span>销量排序</span>
+        <span>价格从高到低</span>
+        <span>价格从低到高</span>
+    </div>
+
+    <div id="product" class="container"></div>
+
+</div>
+
+
+<script>
+
+
+
+
+    /*
+            var allA  = oList.children;
+            var itemA = null;
+            var oldA = null;
+            for (var i =0;i<allA.length;i++){
+                itemA = allA[i].querySelectorAll("a");
+                for(var j=0;j<itemA.length;j++){
+                    itemA[j].onclick = function(){
+                        if(oldA) oldA.style.color = "";
+                        this.style.color = "#2746c4";
+                        oldA = this;
+                    };
+                }
+            }
+            */
+
+
+    /*
+                var oldA = null;
+                var allA = oList.querySelectorAll("a");
+                for(var i=0;i<allA.length;i++){
+                    allA[i].onclick = function(){
+                        if(oldA) oldA.style.color = "";
+                        this.style.color = "#2746c4";
+                        oldA = this;
+                    }
+                }
+                */
+
+
+</script>
+</body>
+</html>

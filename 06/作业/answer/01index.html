@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        .input{
+            margin-left: 20px;
+        }
+
+    </style>
+    <script>
+        window.onload = function(){
+
+            var oUl = document.querySelector("#list");
+            var oLi = oUl.querySelectorAll("li");
+            var len = oLi.length;
+            var oBtn1 = oUl.querySelectorAll(".input1");
+            var oBtn2 = oUl.querySelectorAll(".input2");
+            //console.log(oUl.firstElementChild.previousElementSibling);
+
+            for(var i=0;i<len;i++){
+
+                if(i==len-1){
+                    //oBtn1[i].index = i;
+                    oBtn1[i].onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        //if(this.innerHTML==1){
+                        //    this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.previousElementSibling);
+                       // }else{
+                            this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.previousElementSibling);
+                        //}
+
+                    };
+                    oBtn2[i].onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        //var p = this.parentNode.cloneNode(true);
+                        //this.parentNode.parentNode.replaceChild(this.parentNode.parentNode.firstElementChild,this.parentNode);
+                        if(oUl.lastElementChild.firstElementChild.innerHTML==1){
+                            this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.parentNode.firstElementChild);
+                        }
+
+
+
+                        this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.parentNode.firstElementChild);
+                    };
+                }else if( i==0){
+                    oBtn1[i].onclick = function(){
+                        //var p = this.parentNode;//.parentNode.lastElementChild.cloneNode(true);
+                        //this.parentNode.parentNode.replaceChild(this.parentNode,this.parentNode.parentNode.lastElementChild);
+                        //this.parentNode.parentNode.insertBefore(p,this.parentNode.parentNode.firstElementChild);
+                        this.parentNode.parentNode.appendChild(this.parentNode);
+                    };
+                    oBtn2[i].index = i;
+                    oBtn2[i].onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+
+                        this.parentNode.parentNode.insertBefore(this.parentNode.nextElementSibling,this.parentNode);
+                        //if(oUl.lastElementChild.firstElementChild.innerHTML==this.parentNode.firstChild.innerHTML){
+                         //if(oUl.lastElementChild.firstElementChild.innerHTML==this.index){
+                         //   this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.parentNode.firstElementChild);
+                        //}else{
+                        //    this.parentNode.parentNode.insertBefore(this.parentNode.nextElementSibling,this.parentNode);
+                        //}
+                    };
+
+                }else {
+
+                    oBtn1[i].onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.previousElementSibling);
+                    };
+                    oBtn2[i].onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        if(oUl.lastElementChild.firstElementChild.innerHTML==this.parentNode.firstChild.innerHTML){
+                           this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.parentNode.firstElementChild);
+                        }else{
+                            this.parentNode.parentNode.insertBefore(this.parentNode.nextElementSibling,this.parentNode);
+                        }
+
+                    };
+
+                }
+
+            }
+
+
+
+
+            //console.log(oBtn1);
+/********************************************无法解决两端事件***********************************************/
+            /*
+            for(var i= 0;i<len-1;i++){
+                oBtn1 = oLi[i].querySelector(".input");
+                oBtn2 = oLi[i].lastElementChild;
+                if(i==0){
+                    oBtn1.onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        //this.parentNode.parentNode.insertBefore(oUl.lastElementChild,oUl.firstElementChild);
+                        console.log(oUl.lastElementChild,oUl.firstElementChild);
+                    };
+                    oBtn2.onclick =function(){//点击事件，将下一个兄弟元素插入到该元素上面
+                        this.parentNode.parentNode.insertBefore(this.parentNode.nextElementSibling,this.parentNode)
+                    };
+                }else if(i==len-1){
+                } else{
+                    oBtn1.onclick =function(){//点击事件，将该元素插入到上移兄的元素的上面
+                        this.parentNode.parentNode.insertBefore(this.parentNode,this.parentNode.previousElementSibling)
+                    };
+                    oBtn2.onclick =function(){//点击事件，将下一个兄弟元素插入到该元素上面
+                        this.parentNode.parentNode.insertBefore(this.parentNode.nextElementSibling,this.parentNode)
+                    };
+                }
+
+
+
+            }
+            */
+
+/********************************************只改变数字***************************************************/
+            /*
+            for (var i=0;i<len;i++){
+                oLi[i].index =i;
+                if(i==0){
+                    oLi[i].children[1].onclick = function(){
+                        var flag = this.parentElement.index;
+                        var p1 = oLi[flag].firstChild;
+                        var c = p1.innerHTML;
+                        var p2 = oUl.lastElementChild.firstChild;
+                        p1.innerHTML = parseInt(p2.innerHTML);
+                        p2.innerHTML = parseInt(c);
+                    };
+                    oLi[i].children[2].onclick = function(){
+                        var flag = this.parentElement.index;
+                        var c = oLi[flag].firstChild.innerHTML;
+                        var p1 = oLi[flag].firstChild;
+                        var p2 = oLi[flag].nextElementSibling.firstChild;
+                        p1.innerHTML = parseInt(p2.innerHTML);
+                        p2.innerHTML = parseInt(c);
+                    };
+
+                }else if(i==oLi.length-1){
+                    oLi[i].children[1].onclick = function(){
+                        var flag = this.parentElement.index;
+                        var p1 = oLi[flag].firstChild;
+                        var c = p1.innerHTML;
+                        var p2 = oLi[flag].previousElementSibling.firstChild;
+                        p1.innerHTML = parseInt(p2.innerHTML);
+                        p2.innerHTML = parseInt(c);
+                    };
+                    oLi[i].children[2].onclick = function(){
+                        var flag = this.parentElement.index;
+                        var c = oLi[flag].firstChild.innerHTML;
+                        var p1 = oLi[flag].firstChild;
+                        var p2 = oUl.firstElementChild.firstChild;//oLi[0].nextElementSibling.firstChild;
+                        p1.innerHTML = parseInt(p2.innerHTML);
+                        p2.innerHTML = parseInt(c);
+                    };
+                }else{
+                    addFun(i);
+                }
+
+                function addFun(num){
+                    oLi[i].children[1].onclick = function(){
+                        var flag = this.parentElement.index;
+                        var c = oLi[flag].firstChild.innerHTML;
+                        var p1 = oLi[flag].firstChild;
+                        var p2 = oLi[flag].previousElementSibling.firstChild;
+                        p1.innerHTML = parseInt(p2.innerHTML);
+                        p2.innerHTML = parseInt(c);
+                    };
+                    oLi[i].children[2].onclick = function(){
+                        var flag = this.parentElement.index;
+                        var c = oLi[flag].firstChild.innerHTML;
+                        var p1 = oLi[flag].firstChild;
+                        var p2 = oLi[flag].nextElementSibling.firstChild;
+                        //oLi[flag].firstChild.innerHTML = parseInt(oLi[flag].previousElementSibling.firstChild.innerHTML);
+                        //oLi[flag].previousElementSibling.firstChild.innerHTML = parseInt(c);
+                        p1.innerHTML = parseInt(p2.innerHTML);
+                        p2.innerHTML = parseInt(c);
+                    };
+                }
+            }
+            */
+        }
+    </script>
+</head>
+<body>
+<ul id="list">
+    <li><span>1</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>2</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>3</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>4</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>5</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+    <li><span>6</span><input type="button" value="上移" class="input1"><input type="button" class="input2" value="下移"></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+
+body{
+    font-size: 14px;
+    font-family: "微软雅黑",Arial,sans-serif;
+}
+#wrap{
+    width: 1000px;
+    margin: 0 auto;
+    background: url("../img/bg.jpg") repeat-y;
+    overflow: hidden;
+    /*
+    padding: 144px auto;
+    */
+}
+/*居中容器*/
+.container{
+    width: 760px;
+    margin: 0 auto;
+}
+#choose{
+    background: #ff4632;
+    margin-top: 144px;
+    height: 50px;
+    line-height: 50px;
+    background: url("../img/top.png");
+    text-indent: 21px;
+    /*
+    margin-top:
+    1,上下叠压
+    2、margin-top传递
+    */
+}
+#choose span {
+    color: #000;
+    float: left;
+    margin-right: 10px;
+}
+#choose div{
+    float: left;
+}
+#choose mark{
+    position: relative;
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #28a5c4;
+    text-indent: 6px;
+    padding-right: 30px;
+    color:  #28a5c4;
+    margin: 13px 10px 0 0;
+}
+#choose mark a{
+    position: absolute;
+    top: 3px;
+    right: 2px;
+    height: 18px;
+    width: 18px;
+    color: #fff;
+    line-height: 18px;
+    background-color: #14afd0;
+}
+
+
+
+#list{
+    box-sizing: border-box;/*IE 盒子模型*/
+    padding:20px 0 0 28px;
+    background: url("../img/bottom.png");
+    height: 210px;
+}
+#list li{
+    height: 44px;
+    line-height: 44px;
+}
+#list li span{
+    float: left;
+    color: #8a8a8a;
+}
+#list li a{
+    float: left;
+    margin: 0 12px;
+    color: #000;
+}
+#list li .color{
+    color: #28a5c4;
+}
+#nav-list{
+    box-sizing: border-box;
+    padding-left: 20px;
+    margin-top: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: url("../img/top.png");
+}
+#nav-list span{
+    color: #999;
+    padding: 0 20px;
+}
+#nav-list .active {
+    color: #2746c4;
+}
+#product{
+    height: 3000px;
+    background: url("../img/bottom.png");
+}
+.color1{
+    color: #000;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/cssReset.css">
+    <link rel="stylesheet" href="css/default.css">
+    <script type="text/javascript" src="json.js"></script>
+
+    <script>
+        window.onload = function(){
+            var oList = document.querySelector("#list");
+            var oLi= null;
+            var oSpan = null;
+            var len = crumbData.length;
+            var oA = null;
+            var oMarkA = document.getElementById("choose");
+
+            //加载数据
+            for(var i=0;i<len;i++){
+                oLi = document.createElement("li");
+                oSpan = document.createElement("span");
+                oSpan.innerHTML = crumbData[i]['title'];
+                oLi.appendChild(oSpan);
+                for(var j=0;j<crumbData[i]["data"].length;j++){
+                    oA = document.createElement("a");
+                    oA.setAttribute("href","javascript:;");
+                    oA.innerHTML = crumbData[i]["data"][j];
+                    oLi.appendChild(oA);
+                }
+                oList.appendChild(oLi);
+            }
+
+            //点击li当中的a，给a添加一个颜色
+            var aLi = oList.children; //找到所有的li
+            var itemA = null;
+            //var oldA = null;//记录上次点击的a元素
+            var chooseObj = {};
+            for (var i=0;i<aLi.length;i++){
+                itemA = aLi[i].querySelectorAll("a");
+                aLi[i].flag = null;//给点击的父级做个标记
+                aLi[i].index = i;//给点击的父级添加下标
+                for(var j=0;j<itemA.length;j++){
+                    itemA[j].onclick = function(){
+                        //定点清除 全部清除
+                        //if(oldA) oldA.style.color = "";//给上一次点击清除颜色
+                        //this.style.color = "#2746c4";//给点击元素a设置颜色
+                        //oldA = this;//把当前点击的a元素赋值给 oldA
+
+                        //定点清除  每个a元素清除
+                        var parent = this.parentNode;
+                        //把当前a元素
+                        chooseObj[this.parentNode.index] = this.innerHTML;//二次点击重写
+                        console.log(chooseObj);
+
+
+                        createChooseHtml();
+                        if(parent.flag) this.parentElement.flag.style.color = "";
+                        this.style.color = "#2746c4";
+                        parent.flag=this;
+
+                    };
+                }
+            }
+
+
+            var createElement = document.querySelector("#choose div");
+            function createChooseHtml(){
+                //对象数据没有顺序
+                //对象没有length
+                var str = "";
+                var oMark = null;
+                for(var i=0;i<aLi.length;i++){
+
+                    if(chooseObj[i]){
+                        str +="<mark> "+ chooseObj[i] + "<a data-index=" + i +" href='javascript:;'>X</a></mark>";
+                    }
+                }
+                createElement.innerHTML = str;
+                //找到div中所有的a元素
+                var aA = createElement.querySelectorAll("a");
+                for(var k=0;k<aA.length;k++){
+                    aA[k].index =k;
+                    aA[k].onclick = function(){
+
+                        //从div中删除mark元素
+                        //this.parentNode.parentNode.removeChild(this.parentNode);
+                        this.parentNode.remove();
+
+                        //删除chooseObj中的数据
+                        //delete用于删除对象中的某个属性 如果没有则该方法最终会被释放
+                        //dataset对象可以找见标签里面 data- 开头的属性
+                        delete chooseObj[this.dataset.index];
+                        //删除颜色
+                        aLi[this.dataset.index].flag.style.color = "";
+
+                        //aLi[index].flag
+                        //其中 index flag 都是自定义的属性和下标
+                        /*
+                        var allLi = oList.children;
+                        //console.log(allLi[this.index]);
+                        for(var n=1;n<allLi[this.index].length;n++){
+                            var allLiC = allLi[this.index].children;
+                            allLiC[n].style.color = "black";
+                        }
+                        */
+                    };
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+<div id="wrap">
+
+    <div id="choose" class="container">
+        <span>你的选择：</span>
+
+        <!-- 标记Mark-->
+        <!--
+        <mark>三星<a href="javascript:;">X</a></mark>
+        -->
+        <div id="mark"></div>
+        <!--
+        <mark class="mar">3.0-3.9英寸<a href="javascript:;">X</a></mark>
+        <mark class="mar">苹果(IOS)<a href="javascript:;">X</a></mark>
+        <mark class="mar">3.0-3.9英寸<a href="javascript:;">X</a></mark>
+        <mark class="mar">苹果(IOS)<a href="javascript:;">X</a></mark>
+-->
+    </div>
+
+    <ul id="list" class="container">
+        <!--
+        <li>
+            <span>品牌：</span>
+            <a href="#">苹果</a>
+            <a href="#">小米</a>
+            <a href="#">荣耀</a>
+            <a href="#">魅族</a>
+            <a href="#">华为</a>
+            <a href="#" class="color">三星</a>
+            <a href="#">OPPO</a>
+            <a href="#">vivo</a>
+        </li>
+        -->
+    </ul>
+
+    <div id="nav-list" class="container">
+        <span class="active">综合排名</span>
+        <span>销量排序</span>
+        <span>价格从高到低</span>
+        <span>价格从低到高</span>
+    </div>
+
+    <div id="product" class="container"></div>
+
+</div>
+
+
+<script>
+
+    /*
+
+
+
+
+     */
+</script>
+</body>
+</html>

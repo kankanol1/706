@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            background: none;
+            outline: none;
+        }
+        .clearfix:after{
+            content: ".";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            clear: both;
+        }
+
+        .clearfix{
+            *zoom: 1;
+            /* IE6、7专用 */
+        }
+        ul{
+            list-style: none;
+        }
+
+        /**************************************************/
+
+        #box{
+            padding-top: 118px;
+            background: url("img/01.jpg");
+            margin: 50px auto;
+            height: 382px;
+            width: 700px;
+
+        }
+        #content{
+            /*margin-top:80px;/无法显示*/
+            height: 300px;
+            width: 360px;
+            margin: 0 auto;
+        }
+        #text{
+            min-height: 126px;
+            background: #eeedf8;
+            border: 2px solid #5a4d95;
+            border-radius: 10px;
+            padding: 10px;
+
+        }
+        .p1{
+            margin-top: 10px;
+            height: 30px;
+        }
+        #btn{
+            width: 100px;
+            height: 30px;
+            background-color: #14afd0;
+            color: #fff;
+            border: 2px solid white;
+            font-size: 14px;
+            border-radius: 14px;
+            float: right;
+        }
+        
+
+        .p2{
+            margin-top: 17px;
+            height: 40px;
+        }
+        .p2 img {
+            width: 40px;
+            height: 40px;
+            float: left;
+        }
+        #msg{
+            width: 314px;
+            height: 40px;
+            background: url("img/02.png");
+            font-size: 16px;
+            color: #fff;
+            text-indent: 22px;/*首行文本缩进*/
+            float: right;
+            border: none;
+        }
+
+        .p3{
+            margin-top: 17px;
+            height: 40px;
+        }
+        .p3 img {
+            width: 40px;
+            height: 40px;
+            float: left;
+        }
+        #msg0{
+            width: 314px;
+            height: 40px;
+            background: url("img/02.png");
+            font-size: 16px;
+            color: #fff;
+            text-indent: 22px;/*首行文本缩进*/
+            float: right;
+            border: none;
+        }
+
+        #info{
+            font-size: 16px;
+            line-height: 30px;
+            color: #999;
+        }
+        #list li {
+            height: 30px;
+            line-height: 30px;
+            font-size: 16px;
+            color: #333;
+            padding: 0 10px;
+            margin-bottom: 2px;
+            border-radius: 10px;
+        }
+        #list li:hover{
+            background: pink;
+        }
+        a{
+            float: right;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oInfo = document.getElementById("info");
+            var oList = document.getElementById("list");
+            var oBtn= document.getElementById("btn");
+            var oMsg = document.getElementById("msg");
+            var aLi = document.getElementsByTagName("li");//js是动态的脚本；
+
+            oMsg.onclick = function(){
+                this.value = "";
+            };
+            oBtn.onclick = function(){
+                //判断是否输入了内容,若内容为为空则
+                if(!oMsg.value) {
+                    alert("请输入内容");
+                    return;
+                }
+                //判断ul的子元素长度，若为零 则清除默认显示
+                if(!oList.children.length){
+                    oInfo.style.display = "none";
+                }
+                addLi();
+            };
+
+            //定义addLi()函数
+            function addLi(){
+                var str = "<span> "+(oList.children.length+1)+"</span>\n" + "<em>.</em>\n" +
+                    "<strong>"+ oMsg.value+"</strong>"+"<a href=\"javascript:;\">删除</a>";
+                var oLi = document.createElement("li");//创建li元素
+                oLi.innerHTML = str;
+                oList.appendChild(oLi);
+                oMsg.value = "请输入内容";
+
+                //var oA = oLi.getElementsByTagName("a");
+                var oA = oLi.querySelector("a");
+
+                //给a元素添加注册点击事件程序
+                oA.onclick = function() {
+                    //父级.removeChild()
+                    oList.removeChild(this.parentElement);
+                    if(!oList.children.length){
+                        oInfo.style.display = "block";
+                    }
+                    //给li重新排序
+                    for(var i =0;i<aLi.length;i++){
+                        aLi[i].firstElementChild.innerHTML = i+1;
+                    }
+                };
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="box">
+    <div id="content">
+        <div id="text">
+            <p id="info">留言板</p>
+            <ul id="list">
+                <!--
+                <li>
+                    <span> </span>
+                    <em>.</em>
+                    <strong></strong>
+                    <a href="javascript:;">删除</a>
+                </li>
+                -->
+            </ul>
+        </div>
+        <p class="p1"><input type="button" id="btn" value="发送"></p>
+
+        <p class="p2">
+        <img  src="img/tou.png" alt="">
+        <input type="text" id="msg" value="请输入内容">
+
+        <p class="p3">
+            <img  src="img/wei.png" alt="">
+            <input  id="msg0" value="请输入内容">
+    </div>
+</div>
+
+
+
+<!--
+
+    1、分析设计图
+    2、合理布局
+    3、添加样式css
+
+
+
+    ps常用操作
+
+      Ctrl + N  新建
+      Ctrl + Shift + Alt + S :存储为eb所用格式 ==> png 透明图 JPG不透明
+
+      Ctrl + R：标尺
+      Ctrl + H： 参考线显示隐藏
+
+      Ctrl + "+" :放大
+      Ctrl + "-": s缩小
+      Ctrl + "-": s缩小
+
+      Ctrl + 0：填充满整个区域 以宽高中的最大值
+
+      Ctrl + 1；文件本身大小
+
+
+      切图
+      Ctrl + Shift + C ：剪切选中区域
+      Ctrl + D：取消选中区域
+      F8 显示信息面板
+
+
+
+
+
+
+-->
+</body>
+</html>

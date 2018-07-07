@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格查询</title>
+
+    <style>
+
+/********************************  CSS样式重置  *****************************************/
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: black;
+            font-size: 15px;
+        }
+        .clearfix:after{
+            content: '.';
+            visibility: hidden;
+            height: 0;
+            display: block;
+            clear: both;
+        }
+        .clearfix:after{
+            *zoom: 1;
+        }
+
+/********************************  CSS默认样式  *********************************************/
+
+
+        .center{
+            width: 718px;
+            margin-left: 65px;
+        }
+        #big{
+            background-color: white;
+            margin: 10px auto;
+            width: 872px;
+            position: relative;
+            height: 700px;
+            overflow: hidden;
+        }
+
+
+        #top{
+            border: 1px solid #f4a460;
+            width: 718px;
+            margin-top: 50px;
+            margin-left: 65px;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+        #top div{
+            height: 40px;
+            line-height: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        #top #add{
+            height: 20px;
+            width: 40px;
+            font-size: 12px;
+        }
+        #top div p{
+            float: left;
+            line-height: 40px;
+        }
+        #top div input{
+            float: left;
+            margin: 10px auto;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="big">
+    <div id="top">
+        <div><p>姓名：</p><input type="text"></div>
+        <div><p>性别：</p><input type="text"></div>
+        <div><p>年龄：</p><input type="text"><p style="font-size: 11px;color:gray;margin-left: 5px;">数字样式</p></div>
+        <input id="add" type="button" value="添加">
+    </div>
+
+    <div id="middle" class="center">
+        <p>请选择排序依据：</p>
+        <p>请选择排序方式：</p>
+        <input type="button" value="排序">
+        <input type="button" value="批量删除">
+    </div>
+
+    <div id="bottom" class="center">
+        <table border="1px">
+            <thead>
+            <tr>
+                <th>全选<input type="checkbox"></th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>1</td>
+                <td>小红</td>
+                <td>女</td>
+                <td>18</td>
+                <td>
+                    <input type="button" value="上移">
+                    <input type="button" value="下移">
+                    <input type="button" value="删除">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
